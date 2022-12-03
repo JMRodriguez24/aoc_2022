@@ -9,3 +9,6 @@ erl_crash.dump
 /config/*.secret.exs
 /config/secrets.exs
 .elixir_ls/
+Session.vim
+.*.swp
+.*.un~
