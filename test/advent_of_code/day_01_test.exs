@@ -20,14 +20,12 @@ defmodule AdventOfCode.Day01Test do
       10000
       """
 
-  @tag
   test "part1" do
     result = part1(@input)
 
     assert result == 24000
   end
 
-  @tag
   test "part2" do
     result = part2(@input)
 

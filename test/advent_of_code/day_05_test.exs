@@ -3,7 +3,6 @@ defmodule AdventOfCode.Day05Test do
 
   import AdventOfCode.Day05
 
-  @tag
   test "part1" do
     input = """
         [D]
@@ -21,7 +20,6 @@ defmodule AdventOfCode.Day05Test do
     assert result = 'CMZ'
   end
 
-  @tag
   test "part2" do
     input = """
         [D]

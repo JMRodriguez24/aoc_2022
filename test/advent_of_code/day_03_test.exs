@@ -3,7 +3,6 @@ defmodule AdventOfCode.Day03Test do
 
   import AdventOfCode.Day03
 
-  @tag
   test "part1" do
     input = """
     vJrwpWtwJgWrhcsFMMfFFhFp
@@ -18,7 +17,6 @@ defmodule AdventOfCode.Day03Test do
     assert result == 157
   end
 
-  @tag
   test "part2" do
     input = """
     vJrwpWtwJgWrhcsFMMfFFhFp

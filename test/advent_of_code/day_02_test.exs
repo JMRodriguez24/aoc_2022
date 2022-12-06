@@ -3,7 +3,6 @@ defmodule AdventOfCode.Day02Test do
 
   import AdventOfCode.Day02
 
-  @tag
   test "part1" do
     input = """
     A Y
@@ -16,7 +15,6 @@ defmodule AdventOfCode.Day02Test do
     assert result = 15
   end
 
-  @tag
   test "part2" do
     input = """
     A Y

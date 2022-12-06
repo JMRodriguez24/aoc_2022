@@ -3,7 +3,6 @@ defmodule AdventOfCode.Day04Test do
 
   import AdventOfCode.Day04
 
-  @tag
   test "part1" do
     input = """
     2-4,6-8
@@ -18,7 +17,6 @@ defmodule AdventOfCode.Day04Test do
     assert result == 2
   end
 
-  @tag
   test "part2" do
     input = """
     2-4,6-8
