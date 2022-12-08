@@ -12,6 +12,7 @@ defmodule AdventOfCode.Day04Test do
     6-6,4-6
     2-6,4-8
     """
+
     result = part1(input)
 
     assert result == 2

@@ -6,10 +6,10 @@ defmodule AdventOfCode.Day04 do
     defp two_element_list_to_range([first, last | []]), do: first..last
 
     defp map_to_range(str) do
-      String.split(str, "-") |>
-      Enum.map(&(Integer.parse(&1))) |>
-      Enum.map(fn({first, _}) -> first end) |>
-      two_element_list_to_range()
+      String.split(str, "-")
+      |> Enum.map(&Integer.parse(&1))
+      |> Enum.map(fn {first, _} -> first end)
+      |> two_element_list_to_range()
     end
 
     defp map_to_pair([p1, p2 | []]) do
@@ -20,13 +20,13 @@ defmodule AdventOfCode.Day04 do
         p1: p1_range,
         p1_set: MapSet.new(p1_range),
         p2: p2_range,
-        p2_set: MapSet.new(p2_range),
+        p2_set: MapSet.new(p2_range)
       }
     end
 
     def new(input) do
-      String.split(input, ",") |>
-      map_to_pair()
+      String.split(input, ",")
+      |> map_to_pair()
     end
 
     def fully_contained?(%__MODULE__{p1_set: p1_set, p2_set: p2_set}) do
@@ -40,9 +40,9 @@ defmodule AdventOfCode.Day04 do
   end
 
   defp get_pairs(input) do
-    String.trim_trailing(input) |>
-    String.split("\n") |>
-    Enum.map(&AssignmentPair.new/1)
+    String.trim_trailing(input)
+    |> String.split("\n")
+    |> Enum.map(&AssignmentPair.new/1)
   end
 
   def part1(input) do
@@ -51,7 +51,7 @@ defmodule AdventOfCode.Day04 do
   end
 
   def part2(input) do
-    get_pairs(input) |>
-    Enum.count(&AssignmentPair.overlap?/1)
+    get_pairs(input)
+    |> Enum.count(&AssignmentPair.overlap?/1)
   end
 end

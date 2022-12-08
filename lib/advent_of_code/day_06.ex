@@ -1,10 +1,11 @@
 defmodule AdventOfCode.Day06 do
   defp marker_position(chars, packet_size, pos) do
     {[_ | prefix_tail] = prefix, sufix} = Enum.split(chars, packet_size)
+
     all_different_chars? =
-      Enum.frequencies(prefix) |>
-      Map.keys |>
-      (&(length(&1) == packet_size)).()
+      Enum.frequencies(prefix)
+      |> Map.keys()
+      |> (&(length(&1) == packet_size)).()
 
     if(all_different_chars?) do
       pos

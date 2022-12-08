@@ -15,6 +15,7 @@ defmodule AdventOfCode.Day05Test do
     move 2 from 2 to 1
     move 1 from 1 to 2
     """
+
     result = part1(input)
 
     assert result = 'CMZ'

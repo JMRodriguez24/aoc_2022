@@ -12,6 +12,7 @@ defmodule AdventOfCode.Day03Test do
     ttgJtRGJQctTZtZT
     CrZsJsPPZsGzwwsLwLmpwMDw
     """
+
     result = part1(input)
 
     assert result == 157

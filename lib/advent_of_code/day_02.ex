@@ -1,9 +1,8 @@
 defmodule AdventOfCode.Day02 do
-
   defp parse(input) do
-    String.trim(input) |>
-    String.split("\n") |>
-    Enum.map(&(String.split(&1)))
+    String.trim(input)
+    |> String.split("\n")
+    |> Enum.map(&String.split(&1))
   end
 
   @doc """
@@ -19,9 +18,9 @@ defmodule AdventOfCode.Day02 do
   (0 if you lost, 3 if the round was a draw, and 6 if you won)
   """
   def part1(input) do
-    parse(input) |>
-    Enum.map(&round_to_score_v1/1) |>
-    Enum.sum()
+    parse(input)
+    |> Enum.map(&round_to_score_v1/1)
+    |> Enum.sum()
   end
 
   defp round_to_score_v1(["B", "X"]), do: 1 + 0
@@ -48,9 +47,9 @@ defmodule AdventOfCode.Day02 do
   (0 if you lost, 3 if the round was a draw, and 6 if you won)
   """
   def part2(input) do
-    parse(input) |>
-    Enum.map(&round_to_score_v2/1) |>
-    Enum.sum()
+    parse(input)
+    |> Enum.map(&round_to_score_v2/1)
+    |> Enum.sum()
   end
 
   defp round_to_score_v2(["A", "X"]), do: 3 + 0

@@ -33,31 +33,32 @@ defmodule AdventOfCode.Day05 do
   end
 
   defp parse_stacks(input) do
-    String.trim_trailing(input) |>
-    String.split("\n") |>
-    Enum.take_while(fn s -> String.trim(s) |> String.first() != "1" end) |>
-    Enum.map(&String.to_charlist/1) |>
-    Enum.map(&(Enum.chunk_every(&1, 4, 4, Stream.cycle(' ')))) |>
-    Enum.map(fn chunks -> Enum.map(chunks, fn [_, v | _] -> v end) end) |>
-    Enum.map(&Enum.with_index/1) |>
-    List.flatten() |>
-    Enum.reduce(
-      Map.new,
+    String.trim_trailing(input)
+    |> String.split("\n")
+    |> Enum.take_while(fn s -> String.trim(s) |> String.first() != "1" end)
+    |> Enum.map(&String.to_charlist/1)
+    |> Enum.map(&Enum.chunk_every(&1, 4, 4, Stream.cycle(' ')))
+    |> Enum.map(fn chunks -> Enum.map(chunks, fn [_, v | _] -> v end) end)
+    |> Enum.map(&Enum.with_index/1)
+    |> List.flatten()
+    |> Enum.reduce(
+      Map.new(),
       fn {v, idx}, acc ->
         k = idx + 1
         Map.update(acc, k, [v], fn existing -> [v | existing] end)
-      end) |>
-    Enum.map(fn {k, v} -> {k, Enum.filter(v, &(&1 != 32))} end) |>
-    Enum.map(fn {k, v} -> { k, Stack.new(v) } end) |>
-    Enum.into(Map.new)
+      end
+    )
+    |> Enum.map(fn {k, v} -> {k, Enum.filter(v, &(&1 != 32))} end)
+    |> Enum.map(fn {k, v} -> {k, Stack.new(v)} end)
+    |> Enum.into(Map.new())
   end
 
   defp parse_instructions(input) do
-    String.trim_trailing(input) |>
-    String.split("\n") |>
-    Enum.filter(fn s -> String.trim(s) |> String.starts_with?("move") end) |>
-    Enum.map(&(String.split(&1, " "))) |>
-    Enum.map(fn [_, q, _, f, _, t] ->
+    String.trim_trailing(input)
+    |> String.split("\n")
+    |> Enum.filter(fn s -> String.trim(s) |> String.starts_with?("move") end)
+    |> Enum.map(&String.split(&1, " "))
+    |> Enum.map(fn [_, q, _, f, _, t] ->
       {q, _} = Integer.parse(q)
       {f, _} = Integer.parse(f)
       {t, _} = Integer.parse(t)
@@ -78,7 +79,8 @@ defmodule AdventOfCode.Day05 do
 
       execute_instruction_p1(
         %{instruction | quantity: q - 1, from: f, to: t},
-        %{stacks | f => updated_from_stack, t => updated_to_stack})
+        %{stacks | f => updated_from_stack, t => updated_to_stack}
+      )
     end
   end
 

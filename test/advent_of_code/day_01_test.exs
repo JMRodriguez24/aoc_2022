@@ -4,21 +4,21 @@ defmodule AdventOfCode.Day01Test do
   import AdventOfCode.Day01
 
   @input """
-      1000
-      2000
-      3000
+  1000
+  2000
+  3000
 
-      4000
+  4000
 
-      5000
-      6000
+  5000
+  6000
 
-      7000
-      8000
-      9000
+  7000
+  8000
+  9000
 
-      10000
-      """
+  10000
+  """
 
   test "part1" do
     result = part1(@input)
