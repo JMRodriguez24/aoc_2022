@@ -2,9 +2,10 @@ defmodule AdventOfCode.Day09 do
   def moves(input) do
     String.trim(input)
     |> String.split("\n")
-    |> Enum.map(&(String.split(&1, " ")))
+    |> Enum.map(&String.split(&1, " "))
     |> Enum.flat_map(fn [direction, cnt] ->
       {cnt, _} = Integer.parse(cnt)
+
       for _n <- 1..cnt do
         direction
       end
@@ -37,21 +38,26 @@ defmodule AdventOfCode.Day09 do
   def move_pair({dx, dy}, {hx, hy}, {tx, ty} = tail) do
     {nhx, nhy} = new_head = {hx + dx, hy + dy}
     offset = {nhx - tx, nhy - ty}
-    new_tail = if move_tail?(offset) do
-      move_closer(offset, tail)
-    else
-      tail
-    end
+
+    new_tail =
+      if move_tail?(offset) do
+        move_closer(offset, tail)
+      else
+        tail
+      end
+
     {new_head, new_tail}
   end
 
   defp move_rope_helper([], _delta, new_rope), do: Enum.reverse(new_rope)
+
   defp move_rope_helper([head, tail | rest], delta, new_rope) do
     {new_head, new_tail} = move_pair(delta, head, tail)
     move_rope_helper([tail | rest], calculate_direction(tail, new_tail), [new_head | new_rope])
   end
+
   defp move_rope_helper([head | rest], delta, new_rope) do
-    {new_head, new_tail} = move_pair(delta, head, {0,0})
+    {new_head, new_tail} = move_pair(delta, head, {0, 0})
     move_rope_helper(rest, calculate_direction({0, 0}, new_tail), [new_head | new_rope])
   end
 
@@ -69,13 +75,14 @@ defmodule AdventOfCode.Day09 do
   end
 
   defp visited_by_tail_helper([], _, visited), do: visited
+
   defp visited_by_tail_helper([direction | rest], rope, visited) do
     new_rope = move_rope(rope, direction_deltas(direction))
     visited_by_tail_helper(rest, new_rope, MapSet.put(visited, List.last(new_rope)))
   end
 
   def visited_by_tail(moves, knots) do
-    rope = for _ <- 1..knots, do: {0,0}
+    rope = for _ <- 1..knots, do: {0, 0}
     visited_by_tail_helper(moves, rope, MapSet.new([{0, 0}]))
   end
 

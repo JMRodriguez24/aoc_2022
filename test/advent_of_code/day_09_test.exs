@@ -26,6 +26,7 @@ defmodule AdventOfCode.Day09Test do
     L 5
     R 2
     """
+
     result = part1(input)
 
     assert result == 13
@@ -42,6 +43,7 @@ defmodule AdventOfCode.Day09Test do
     L 25
     U 20
     """
+
     result = part2(input)
 
     assert result == 36
