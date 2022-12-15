@@ -3,19 +3,117 @@ defmodule AdventOfCode.Day14Test do
 
   import AdventOfCode.Day14
 
-  @tag :skip
-  test "part1" do
-    input = nil
-    result = part1(input)
+  test "trace_line" do
+    input = [[498, 4], [498, 6]]
 
-    assert result
+    result = trace_line(input)
+
+    assert result == %{
+             {498, 4} => :rock,
+             {498, 5} => :rock,
+             {498, 6} => :rock
+           }
   end
 
-  @tag :skip
+  test "edges" do
+    input = [[498, 4], [498, 6], [496, 6]]
+
+    result = edges(input, :infinity, 0, 0)
+
+    assert result == {496, 498, 6}
+  end
+
+  test "scan" do
+    input = """
+    498,4 -> 498,6 -> 496,6
+    """
+
+    result = scan(input)
+
+    assert result == {
+             496,
+             498,
+             6,
+             %{
+               {498, 4} => :rock,
+               {498, 5} => :rock,
+               {498, 6} => :rock,
+               {497, 6} => :rock,
+               {496, 6} => :rock
+             }
+           }
+  end
+
+  describe "move_sand" do
+    test "rest" do
+      structure = %{
+        {496, 6} => :rock,
+        {497, 6} => :rock,
+        {498, 6} => :rock
+      }
+
+      cur_pos = {497, 5}
+
+      result = move_sand(cur_pos, structure)
+
+      assert result == :rest
+    end
+
+    test "down" do
+      structure = %{}
+
+      cur_pos = {497, 5}
+
+      result = move_sand(cur_pos, structure)
+
+      assert result == {497, 6}
+    end
+
+    test "diagonal_left" do
+      structure = %{
+        {497, 6} => :rock
+      }
+
+      cur_pos = {497, 5}
+
+      result = move_sand(cur_pos, structure)
+
+      assert result == {496, 6}
+    end
+
+    test "diagonal_right" do
+      structure = %{
+        {497, 6} => :rock,
+        {496, 6} => :rock
+      }
+
+      cur_pos = {497, 5}
+
+      result = move_sand(cur_pos, structure)
+
+      assert result == {498, 6}
+    end
+  end
+
+  test "part1" do
+    input = """
+    498,4 -> 498,6 -> 496,6
+    503,4 -> 502,4 -> 502,9 -> 494,9
+    """
+
+    result = part1(input)
+
+    assert result == 25
+  end
+
   test "part2" do
-    input = nil
+    input = """
+    498,4 -> 498,6 -> 496,6
+    503,4 -> 502,4 -> 502,9 -> 494,9
+    """
+
     result = part2(input)
 
-    assert result
+    assert result == 93
   end
 end
